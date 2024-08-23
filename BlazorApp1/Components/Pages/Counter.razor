@@ -1,0 +1,40 @@
+﻿@page "/counter"
+@inject MyService MyServiceInstance
+@rendermode InteractiveServer
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+@if (!ServerError)
+{
+<p role="status">Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+    
+}
+
+@code {
+    public bool ServerError { get; set; }
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        try
+        {
+            await MyServiceInstance.DoSomething();
+        }
+        catch
+        {
+            ServerError = true;
+        }
+    }
+
+
+}

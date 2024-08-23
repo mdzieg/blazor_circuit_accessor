@@ -1,0 +1,34 @@
+﻿@page "/"
+@using BlazorApp1.Components
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <base href="/"/>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="app.css"/>
+    <link rel="stylesheet" href="BlazorApp1.styles.css"/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <HeadOutlet/>
+</head>
+
+<body>
+<app>
+    @(await Html.RenderComponentAsync<App>(RenderMode.Server))
+</app>
+<script src="_framework/blazor.server.js" autostart="false"></script>
+<script>
+    Blazor.start({
+        reconnectionOptions: {
+            maxRetries: 120,
+            retryIntervalMilliseconds: 5000
+        }
+    });
+</script>
+</body>
+
+</html>
