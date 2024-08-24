@@ -35,4 +35,16 @@ public class ServicesAccessorCircuitHandler : CircuitHandler
             circuitServicesAccessor.Services = null;
         };
     }
+
+    public override Task OnCircuitOpenedAsync(Circuit circuit, CancellationToken cancellationToken)
+    {
+        circuitServicesAccessor.Services = services;
+        return base.OnCircuitOpenedAsync(circuit, cancellationToken);
+    }
+
+    public override Task OnConnectionUpAsync(Circuit circuit, CancellationToken cancellationToken)
+    {
+        circuitServicesAccessor.Services = services;
+        return base.OnConnectionUpAsync(circuit, cancellationToken);
+    }
 }
